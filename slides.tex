@@ -124,11 +124,13 @@ and False _ = False
 \label{sec:pure-lazy-fp}
 
 \begin{frame}[fragile]{Example: factorial in Python}
-  def factorial(n):
-    if n == 0:
-        return 1
-    else:
-        return n * factorial(n - 1)
+\begin{verbatim}
+def factorial(n):
+  if n == 0:
+      return 1
+  else:
+      return n * factorial(n - 1)
+\end{verbatim}
 \end{frame}
 
 \begin{frame}[fragile]{Example: factorial in Haskell}
