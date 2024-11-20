@@ -3,11 +3,19 @@ module Main where
 
 import Prelude hiding (and, (&&), const)
 
+two = 2
+
+constant = \x y -> x
+
+isTrue = \x -> x == True
+
+plusTwo = \x -> x + 2
+
 -- f :: Int -> Int
 f x = x + 2
 
 -- const :: a -> b -> a
-const x y = x
+-- const x y = x
 
 -- factorial :: Int -> Int
 factorial 0 = 1
@@ -37,5 +45,50 @@ and False _ = False
 -- (&&) :: Bool -> Bool -> Bool
 True  && x  = x
 False && _ = False
+
+data Day = Saturday
+         | Sunday
+         | Monday
+         | Tuesday
+         | Wednesday
+         | Thursday
+         | Friday
+         deriving Eq
+
+nextDay Saturday  = Sunday
+nextDay Sunday    = Monday
+nextDay Monday    = Tuesday
+nextDay Tuesday   = Wednesday
+nextDay Wednesday = Thursday
+nextDay Thursday  = Friday
+nextDay Friday    = Saturday
+
+saturdayIsSaturaday = Saturday == Saturday
+
+data Language = Haskell
+              | Lean
+              | Idris
+              | Python
+              | Lisp
+              | Java
+
+isPureFunctional Haskell = True
+isPureFunctional Idris   = True
+isPureFunctional Lean    = True
+isPureFunctional _       = False
+
+data Person = MakePerson String Int
+
+myName =  MakePerson "Haskell" 34
+
+getAge (MakePerson _ age) = age
+
+getName (MakePerson name _) = name
+
+data PersonR =
+  MakePersonR
+    { name :: String
+    , age  :: Int }
+  deriving (Show, Eq)
 
 main = undefined
