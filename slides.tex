@@ -1,4 +1,7 @@
 \documentclass[pdf]{beamer}
+
+\usepackage{graphicx}
+
 \mode<presentation>{}
 
 \title{A good programming language is a \textit{Functional} one}
@@ -106,39 +109,27 @@ and False _ = False
   Haskell is smart enough to \textit{infer} the type of \verb|and|, \verb|Bool -> Bool -> Bool|, by itself, and if you give it the wrong argument, it will tell you exactly what you did wrong!
 
   e.g. \verb|test = and True 'c'| will result in the following error message:
-
-\begin{verbatim}
-/Users/artin/Teaching/fp-haskell-talk-UT/Main.hs:26:17-19: error: [GHC-83865]
-    • Couldn't match expected type ‘Bool’ with actual type ‘Char’
-    • In the second argument of ‘and’, namely ‘'c'’
-      In the expression: and True 'c'
-      In an equation for ‘test’: test = and True 'c'
-   |
-26 | test = and True 'c'
-   |                 ^^^
-\end{verbatim}
-
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{and-type-error}
+  \end{figure}
 \end{frame}
 
 \section{Pure and Lazy Functional Programming}
 \label{sec:pure-lazy-fp}
 
 \begin{frame}[fragile]{Example: factorial in Python}
-\begin{verbatim}
-def factorial(n):
-  if n == 0:
-      return 1
-  else:
-      return n * factorial(n - 1)
-\end{verbatim}
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{factorial-py}
+  \end{figure}
 \end{frame}
 
 \begin{frame}[fragile]{Example: factorial in Haskell}
-
-\begin{verbatim}
-factorial 0 = 1
-factorial n = n * factorial (n - 1)
-\end{verbatim}
+    \begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{factorial-hs}
+  \end{figure}
 
   \pause
   Let's evaluate \verb|factorial 3|:
@@ -158,29 +149,24 @@ factorial n = n * factorial (n - 1)
 
 \begin{frame}[fragile]{Example: say in Python}
 
-  \verb|say| is a function that given a number \textit{n} and an string \textit{string}, will repeat the \textit{string} \textit{n} times.
+  \verb|say| is a function that given a number \textit{n} and a string \textit{string}, will repeat the \textit{string} \textit{n} times.
 
   e.g. \verb|say(2,"Hi ") = "Hi Hi "|
 
-\begin{verbatim}
-def say(n,string):
-  i = 0
-  final = ""
-  while i < n:
-      final = string + final
-      i += 1
-  return final
-\end{verbatim}
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{say-py}
+  \end{figure}
 
 \end{frame}
 
 \begin{frame}[fragile]{Example: say in Haskell}
   The \verb|++| operator concatenates two strings together.
 
-\begin{verbatim}
-say 0 _   = ""
-say n str = str ++ say (n-1) str
-\end{verbatim}
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{say-hs}
+  \end{figure}
 
   \pause
   Let's evaluate \verb|say 2 "Hi "|:
@@ -199,27 +185,20 @@ say n str = str ++ say (n-1) str
 \begin{frame}[fragile]{Example: hasEven in Python}
   \verb|hasEven| is a function that given a character, \textit{char}, and a string \textit{string}, will return \textit{true} if the number of times \textit{char} occurs in \textit{string} is even.
 
-\begin{verbatim}
-def hasEven(char, string):
-    i = 0
-    for c in string:
-        if c == char:
-            i += 1
-    return (True if (i % 2) == 0 else False)
-\end{verbatim}
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{hasEven-py}
+  \end{figure}
 
 \end{frame}
 
 \begin{frame}[fragile]{Example: hasEven in Haskell}
-\verb|even| is a built-in function that says whether its input is even or not.
-\begin{verbatim}
-hasEven char string = even (loop 0 string)
-  where
-    loop n ""           = n
-    loop n (ch : chars) = if ch == char
-                            then loop (n + 1) chars
-                            else loop n chars
-\end{verbatim}
+  \verb|even| is a built-in function that says whether its input is even or not.
+
+    \begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{hasEven-hs}
+  \end{figure}
 
   \pause
   Let's evaluate \verb|hasEven 'e' "eyes"|:
