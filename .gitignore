@@ -5,3 +5,8 @@
 *.out
 *.snm
 *.toc
+*.o
+*.hi
+*.fdb_latexmk
+*.fls
+*.vrb
