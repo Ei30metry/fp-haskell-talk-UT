@@ -1,23 +1,39 @@
 -- |
 module Main where
 
-import Prelude hiding (and, (&&), const)
+import Prelude hiding (and, (&&), const, (.), map)
 
+two :: Integer
 two = 2
 
-constant = \x y -> x
-
-isTrue = \x -> x == True
-
+plusTwo :: Integer -> Integer
 plusTwo = \x -> x + 2
 
--- f :: Int -> Int
-f x = x + 2
+plusTwo' :: Integer -> Integer
+plusTwo' x = x + 2
 
--- const :: a -> b -> a
--- const x y = x
+const :: a -> b -> a
+const x y = x
 
--- factorial :: Int -> Int
+(+++) :: String -> String -> String
+str1 +++ str2 = strConcat str1 str2
+
+-- s1 +++ s2 +++ s3 == (s1 +++ s2) +++ s3
+--                  == s1 +++ (s2 +++ s3)
+
+compose :: (b -> c) -> (a -> b) -> a -> c
+compose g f x = g (f x)
+
+(.) :: (b -> c) -> (a -> b) -> a -> c
+(.) g f x = g (f x)
+
+-- h . g . f = h . (g . f)
+
+compositionExample = (\y -> y^9 ) . (\x -> x * 3) . plusTwo . const 4
+
+compositionExample2 = (^ 9) . (* 3) . plusTwo . const 4
+
+-- factorial :: Integer -> Integer
 factorial 0 = 1
 factorial n = n * factorial (n - 1)
 
@@ -29,14 +45,14 @@ hasEven char string = even (loop 0 string)
                             then loop (n + 1) chars
                             else loop n chars
 
--- say :: Int -> String -> String
+-- say :: Integer -> String -> String
 say 0 _   = ""
 say n str = str ++ say (n - 1) str
 
 -- sayTwo :: String -> String
 sayTwo str = say 2 str
 
--- and :: Bool -> Bool -> Bool
+and :: Bool -> Bool -> Bool
 and True x  = x
 and False _ = False
 
@@ -46,49 +62,60 @@ and False _ = False
 True  && x  = x
 False && _ = False
 
-data Day = Saturday
-         | Sunday
-         | Monday
-         | Tuesday
-         | Wednesday
-         | Thursday
-         | Friday
-         deriving Eq
+type Size = Int
 
-nextDay Saturday  = Sunday
-nextDay Sunday    = Monday
-nextDay Monday    = Tuesday
-nextDay Tuesday   = Wednesday
-nextDay Wednesday = Thursday
-nextDay Thursday  = Friday
-nextDay Friday    = Saturday
+data HasRice = Yes | No
 
-saturdayIsSaturaday = Saturday == Saturday
+data Food = Pizza Size | Kebab Size HasRice
 
-data Language = Haskell
-              | Lean
-              | Idris
-              | Python
-              | Lisp
-              | Java
+isKebabWithRice :: Food -> HasRice
+isKebabWithRice (Kebab _ hasRice) = hasRice
+isKebabWithRice _                 = No
 
-isPureFunctional Haskell = True
-isPureFunctional Idris   = True
-isPureFunctional Lean    = True
-isPureFunctional _       = False
+getFoodSize :: Food -> Size
+getFoodSize (Pizza size)   = size
+getFoodSize (Kebab size _) = size
 
-data Person = MakePerson String Int
+isPizzaOfSizeSeven :: Food -> Bool
+isPizzaOfSizeSeven (Pizza 7) = True
+isPizzaOfSizeSeven _         = False
 
-myName =  MakePerson "Haskell" 34
+(/?) :: Integer -> Integer -> Maybe Integer
+x /? 0 = Nothing
+x /? y = Just (division x y)
 
-getAge (MakePerson _ age) = age
+-- class Show a where
+--   show :: a -> String
 
-getName (MakePerson name _) = name
+-- instance Show Bool where
+--   show True  = "True"
+--   show False = "False"
 
-data PersonR =
-  MakePersonR
-    { name :: String
-    , age  :: Int }
-  deriving (Show, Eq)
+-- class Functor f where
+--   fmap :: (a -> b) -> f a -> f b
+
+-- instance Functor [] where
+--   fmap = map
+
+-- fmap id x == x
+-- fmap (g . f) x == (fmap g . fmap f) x
+
+-- instance Functor Maybe where
+--   fmap f (Just x) = Just (f x)
+--   fmap f Nothing = Nothing
+
+type List a = [a]
+
+map :: (a -> b) -> List a -> List b
+map f [] = []
+map f (x : xs) = f x : map f xs
+
+strConcat = (<>)
 
 main = undefined
+
+division :: Integer -> Integer -> Integer
+division = undefined
+
+-- (+) :: Integer -> Integer -> Integer
+-- (+) = undefined
