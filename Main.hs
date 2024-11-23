@@ -119,3 +119,11 @@ division = undefined
 
 -- (+) :: Integer -> Integer -> Integer
 -- (+) = undefined
+
+instance Functor Maybe where
+  fmap f (Just x) = Just (f x)
+  fmap f Nothing  = Nothing
+
+instance Functor List where
+  fmap f (x : xs) = f x : fmap f xs
+  fmap f []       = []

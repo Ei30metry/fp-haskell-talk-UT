@@ -289,9 +289,9 @@ The syntax of Simply Typed Lambda-Calculus extended with natural numbers
 \begin{frame}{Miranda}
   \begin{figure}[H]
     \centering
-    \subfloat[David Turner]{\includegraphics[width=0.40\linewidth]{David-Turner}}
+    \subfloat[David Turner]{\includegraphics[width=0.33\linewidth]{David-Turner}}
     \hspace{0.3cm}
-    \subfloat[Miranda]{\includegraphics[width=0.33\linewidth]{Miranda}}
+    \subfloat[Miranda]{\includegraphics[width=0.30\linewidth]{Miranda}}
   \end{figure}
   \begin{itemize}
   \item Created in 1985 by David Turner
@@ -299,6 +299,8 @@ The syntax of Simply Typed Lambda-Calculus extended with natural numbers
   \item Algebraic datatypes
   \item Hindley-Milner type inference
   \item List comprehensions
+  \item Beautiful syntax
+  \item Proprietary
   \end{itemize}
 \end{frame}
 
@@ -326,6 +328,7 @@ The syntax of Simply Typed Lambda-Calculus extended with natural numbers
     \subfloat[Working group 2.8]{\includegraphics[width=0.33\textwidth]{haskell-working-group}}
     \begin{itemize}
     \item Devised by a committee in 1998
+    \item Greatly inspired by Miranda
     \item Developed to have a single standard for \textit{pure} and \textit{lazy} functional languages
     \item Later standards Haskell98 and Haskell2010
     \end{itemize}
@@ -368,6 +371,7 @@ The syntax of Simply Typed Lambda-Calculus extended with natural numbers
 \end{frame}
 
 \begin{frame}{Haskell: implementations}
+  Haskell has had many implementation, but currently GHC is the most performant and featurful implementaion.
   \begin{itemize}
   \item GHC
   \item hbc
@@ -376,7 +380,6 @@ The syntax of Simply Typed Lambda-Calculus extended with natural numbers
   \item UHC
   \item LHC
   \end{itemize}
-
 \end{frame}
 
 \begin{frame}{GHC Haskell}
@@ -397,7 +400,7 @@ The syntax of Simply Typed Lambda-Calculus extended with natural numbers
 \begin{frame}{GHCi: GHC's REPL}
   \begin{figure}[H]
     \centering
-    \includegraphics[width=0.50\textwidth]{ghci}
+    \includegraphics[width=0.90\textwidth]{ghci}
   \end{figure}
   \begin{itemize}
   \item GHC has a REPL called GHCi that let's you compile Haskell to byte code and run it interactively.
@@ -417,7 +420,7 @@ The syntax of Simply Typed Lambda-Calculus extended with natural numbers
 \end{frame}
 
 \begin{frame}{Using functions}
-  Just like in Lambda-calculus, in order to apply a function to its argument, we don't need to put the arguments in parenthesis.
+  Just like in Lambda-calculus, applying a function to its argument is done without putting them inside parenthesis.
 
   Applying the function \code{f} to arguments \code{x} and {y}:
   \begin{itemize}
@@ -441,7 +444,7 @@ The syntax of Simply Typed Lambda-Calculus extended with natural numbers
 \begin{frame}{Function composition}
   \begin{itemize}
   \item Just another function!
-  \item Takes to functions and a value. First applies the second argument and then the first
+  \item Takes two functions and a value. First applies the second argument and then the first
   \item The \code{.} operator is amongst the most used operators!
   \end{itemize}
 
@@ -462,6 +465,10 @@ The syntax of Simply Typed Lambda-Calculus extended with natural numbers
 \end{frame}
 
 \begin{frame}{List and laziness}
+  \begin{itemize}
+  \item The empty list is represented using \code{[]}
+  \item We use the cons operator \code{(:)} to add an element to the start of a list
+  \end{itemize}
   \begin{figure}[H]
     \centering
     \subfloat[]{\includegraphics[width=0.50\textwidth]{emptyList-oneAndTwo}}
@@ -501,7 +508,7 @@ The syntax of Simply Typed Lambda-Calculus extended with natural numbers
 \end{frame}
 
 \begin{frame}{Pattern matching}
-  You can \emph{match} and \emph{deconstruct} patterns on the left hand side of an equation
+  You can \emph{match} and \emph{deconstruct} patterns on the left hand side of an equation.
 
     \begin{figure}[H]
     \centering
@@ -516,7 +523,6 @@ The syntax of Simply Typed Lambda-Calculus extended with natural numbers
 
 \begin{frame}{The \code{map} function}
   The \code{map} function applies a function to all of the elements of a list
-
   Examples
 \begin{figure}[H]
     \centering
@@ -524,7 +530,6 @@ The syntax of Simply Typed Lambda-Calculus extended with natural numbers
     \vspace{0.1cm}
     \subfloat[Example 2]{\includegraphics[width=\textwidth]{map-say}}
     \vspace{0.1cm}
-    \pause
   \end{figure}
 \end{frame}
 
@@ -537,13 +542,13 @@ The syntax of Simply Typed Lambda-Calculus extended with natural numbers
 
   Let's evaluate \code{map (+2) [1,2,3]}
   \begin{enumerate}
-  \item \code{map (+2) [1,2,3]}
-  \item \code{(1 + 2) : map (+2) [2,3]}
-  \item \code{(1 + 2) : (2 + 2) : map (+2) [3]}
-  \item \code{(1 + 2) : (2 + 2) : (3 + 3) : map (+2) []}
-  \item \code{(1 + 2) : (2 + 2) : (3 + 2) : []}
-  \item \code{3 : 4 : 5 : []}
-  \item \code{[3,4,5]}
+  \item<1-> \code{map (+2) [1,2,3]}
+  \item<2-> \code{(1 + 2) : map (+2) [2,3]}
+  \item<3-> \code{(1 + 2) : (2 + 2) : map (+2) [3]}
+  \item<4-> \code{(1 + 2) : (2 + 2) : (3 + 3) : map (+2) []}
+  \item<5-> \code{(1 + 2) : (2 + 2) : (3 + 2) : []}
+  \item<6-> \code{3 : 4 : 5 : []}
+  \item<7-> \code{[3,4,5]}
   \end{enumerate}
 \end{frame}
 
@@ -617,7 +622,16 @@ The syntax of Simply Typed Lambda-Calculus extended with natural numbers
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Functor: examples}
+\begin{frame}{\code{Functor}: two instances}
+  Yes! the \code{Functor} instance of the \code{List} type is just the \code{map} function!
+
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.70\textwidth]{functor-instances}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{\code{Functor}: examples}
   \begin{figure}[H]
     \centering
     \subfloat[]{\includegraphics[width=0.80\textwidth]{type-of-fmap}}
@@ -661,10 +675,10 @@ The syntax of Simply Typed Lambda-Calculus extended with natural numbers
 \end{frame}
 
 \begin{frame}{Type Inference}
-  TODO rephrase Haskell's type system is so clever that we didn't need \emph{any} type signatures for the examples I showed you!
-  Because of this, the type signature of the upcoming examples are commented out.
+  Haskell's type system is clever enough that we didn't actually need to write \emph{any} type signatures for the examples I showed you!
+  To emphasis this, the type signatures of the upcoming examples are commented out.
 
-  Here are some reasons for why you should write them though:
+  Here are some good reasons for why you should write them though:
   \begin{itemize}
   \item Type signatures are like documentation, they tell us a lot about the function at hand
   \item Sometimes Haskell infers types that are \emph{more} polymorphic than you'd want
