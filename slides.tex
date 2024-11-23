@@ -259,28 +259,29 @@ The syntax of Simply Typed Lambda-Calculus extended with natural numbers
   \end{figure}
   \begin{itemize}
     \item Short for \emph{Meta Language}
-    \item Family of impure functional languages
+    \item Family of strict and impure functional languages. Some implementations: SML, OCaml, F\#
     \item Introduced type inference with the Hindley-Milner type system
-    \item Algebraic datatypes
+    \item Algebraic datatypes and pattern matching
     \item ML modules
-    \item Pattern matching
-    \item Mutable references
-    \item SML, OCaml, F\#
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Erlang}
   \begin{figure}[H]
     \centering
-    \includegraphics[width=0.33\textwidth]{Erlang}
+    \subfloat[Joe Armstrong]{\includegraphics[width=0.15\textwidth]{Joe-Armstrong}}
+    \subfloat[Robert Virding]{\includegraphics[width=0.15\textwidth]{Robert-Virding}}
+    \subfloat[Mike Williams]{\includegraphics[width=0.15\textwidth]{Mike-Williams}}
+    \hspace{0.2cm}
+    \subfloat[Erlang]{\includegraphics[width=0.25\textwidth]{Erlang}}
   \end{figure}
   \begin{itemize}
-  \item Concurrency
+  \item Strong support for concurrency
+  \item Strict and dynamically typedx
   \item Developed in 1986 at Ericsson for telecommuting purposes
-  \item Named after mathematician Agner Krarup Erlang and short for Ericson Language
-  \item BEAM VM (bytecode)
-  \item Native codegen
+  \item Named after mathematician Agner Krarup Erlang and short for \emph{Ericson Language}
   \item Hot code reloading
+  \item BEAM VM
   \item REPL
   \end{itemize}
 \end{frame}
@@ -830,7 +831,7 @@ The syntax of Simply Typed Lambda-Calculus extended with natural numbers
 
 \begin{frame}{In industry}
   \begin{itemize}
-  \item NASA' coilot and ogma projects are written in Haskell
+  \item NASA' copilot and ogma projects are written in Haskell
   \item Meta's spam filter is written in Haskell
   \item JP Morgan uses Haskell
   \item IOHK cardano uses Haskell
